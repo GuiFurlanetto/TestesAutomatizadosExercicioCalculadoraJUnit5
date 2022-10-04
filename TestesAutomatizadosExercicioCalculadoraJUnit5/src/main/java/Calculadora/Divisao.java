@@ -17,12 +17,11 @@ public class Divisao implements OperaçãoMatematica {
         } catch (Exception e) {
             throw new RuntimeException("Não é possivel divisão por valor menor ou igual a 0");
         }
-
     }
 
     @Override
     public double calcular() throws Exception{
-        if (numero2 >= 0) {
+        if (numero2 > 0) {
             return numero1 / numero2;
         }
         throw new Exception("Não é possivel divisão por valor menor ou igual a 0");

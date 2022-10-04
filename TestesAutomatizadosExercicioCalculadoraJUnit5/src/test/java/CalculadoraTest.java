@@ -1,21 +1,16 @@
 import Calculadora.*;
 import org.junit.jupiter.api.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.rules.ExpectedException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculadoraTest {
 
 
+    @Disabled
     @Test
     public void testeSeReconheceuJUnit5 (){
-
-        assertEquals(1,1);
-
-    }
+        assertEquals(1,1);}
 
     double numero1 = 10;
     double numero2 = 5;
@@ -101,42 +96,21 @@ public class CalculadoraTest {
         assertEquals("Divisão de " + numero1 + " / " + numero2 + " = " + 2.0,divisao.toString());
         assertNotNull("o valor não é nulo", divisao.toString());
     }
+    @AfterEach
 
+    @BeforeEach
+    @Test
+    @DisplayName("Não Permitir Divisão Menor ou Igual a 0")
+    public void testeDivisaoMenorIgual0() throws Exception {
+        //Given
+        Divisao divisao = new Divisao(10,0);
 
+        Throwable throwable = assertThrows(Exception.class,
+                () -> divisao.calcular());
 
+        assertEquals("Não é possivel divisão por valor menor ou igual a 0",throwable.getMessage());
 
-//    @AfterEach
-
-//    @BeforeEach
-//    @Test
-//    public void testeDivisaoComExpection() throws Exception {
-//        //Given
-//        Divisao divisao = new Divisao(10,0);
-//        //When
-//        try {
-//            divisao.calcular();
-//        //    fail("Não lancou a exception");
-//        } catch (Exception e) {
-//            assertEquals(e.getMessage(), "A velocidade deve ser maior que zero");
-//        }
-//
-//        //Then
-////        divisao.calcular();
-////
-////        Throwable throwable = assertThrows(Exception.class,
-////                () -> divisao.calcular());
-////
-////        assertEquals("Não é possivel divisão por valor menor ou igual a 0",throwable.getMessage());
-
-
-//        assertFalse(divisao.calcular() == 10);
-//        Assertions.assertTrue(divisao.calcular() == 2);
-//        Assertions.assertNotEquals(10,divisao.calcular());
-//        Assertions.assertEquals(divisao.calcular(),2,0.01);
-        //morreu xAssertions.assertThat(divisao.toString(),is("Divisão de  " + numero1 + " / " + numero2 + " = " + 2.0));
-        //morreu xAssertions.assertThat(divisao.toString(),is(not("Divisão de " + numero1 + " / " + numero2 + " = " + 10.0)));
-        //Assertions.assertNotNull("o valor não é nulo", divisao.calcular());
-//    }
+    }
     @AfterEach
 
     @BeforeEach
@@ -153,8 +127,6 @@ public class CalculadoraTest {
         // Then
         Assertions.assertEquals(historicoCalc.getOperacoes().toString(), "[Soma de 10.0 + 5.0 = 15.0]");
         Assertions.assertTrue(historicoCalc.getOperacoes() == historicoCalc.getOperacoes());
-
-
 
     }
 
